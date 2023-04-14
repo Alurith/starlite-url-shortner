@@ -1,0 +1,3 @@
+starlite[redis,jinja]==1.51.10
+uvicorn==0.21.1
+shortuuid==1.0.11
