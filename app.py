@@ -5,9 +5,11 @@ from starlite.cache.redis_cache_backend import (
 )
 from starlite.contrib.jinja import JinjaTemplateEngine
 
+from lib.settings import redis
 from routes import routes
 
-config = RedisCacheBackendConfig(url="redis://redis", port=6379, db=0)
+
+config = RedisCacheBackendConfig(url=redis.URL, port=6379, db=0)
 redis_backend = RedisCacheBackend(config=config)
 
 cache_config = CacheConfig(backend=redis_backend)
