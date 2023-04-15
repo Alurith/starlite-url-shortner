@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, AnyHttpUrl
 
 
 class UrlResponse(BaseModel):
@@ -6,5 +6,5 @@ class UrlResponse(BaseModel):
 
 
 class CreateURL(BaseModel):
-    url: str
+    url: AnyHttpUrl
     custom_path: str | None

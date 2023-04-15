@@ -2,7 +2,7 @@ from starlite import get, Template
 from starlite.controller import Controller
 from starlite.handlers import post
 from starlite import Request, Redirect
-
+from pydantic import ValidationError
 from shared.urls import create_short_url, get_short_url
 from schemas.urls import CreateURL
 
@@ -40,6 +40,15 @@ class PageController(Controller):
         kwargs = {}
         for key, value in data.items():
             kwargs[key] = value
+        try:
+            kwargs = CreateURL(**kwargs).dict()
+        except ValidationError as e:
+            context = {"error": True, "fields": []}
+            fields = []
+            for error in e.errors():
+                fields.append({"name": error.get("loc")[0], "msg": error.get("msg")})
+            context["fields"] = fields
+            return Template(name="pages/homepage.html", context=context)
 
-        context = await create_short_url(request, **CreateURL(**kwargs).dict())
+        context = await create_short_url(request, **kwargs)
         return Template(name="pages/url.html", context=context.dict())
