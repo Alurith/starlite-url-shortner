@@ -18,4 +18,7 @@ class UrlController(Controller):
     @get(path="/{uuid:str}")
     async def get_url(self, request: Request, uuid: str) -> urls.UrlResponse:
         resp = await get_short_url(request, uuid)
-        return resp
+        url = resp.dict().get("path")
+        if url is None:
+            url = request.app.route_reverse("404")
+        return urls.UrlResponse(path=url)

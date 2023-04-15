@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class UrlResponse(BaseModel):
-    path: str
+    path: str | None
 
 
 class CreateURL(BaseModel):

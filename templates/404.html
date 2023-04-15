@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+
+{% block page_content %}
+<section class="container">
+    <hgroup>
+        <h1>404 not found</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus vel nibh et vulputate.</p>
+    </hgroup>
+    <p>Go back to the: <a href="{{url_for('homepage')}}">homepage</a></p>
+</section>
+{% endblock %}

@@ -12,7 +12,7 @@ api_router = Router(
 
 page_router = Router(
     path="/",
-    route_handlers=[pages.PageController],
+    route_handlers=[pages.PageController, pages.BasicPageController],
 )
 
 root_router = [api_router, page_router]

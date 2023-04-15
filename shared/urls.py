@@ -1,5 +1,5 @@
 from pydantic import AnyHttpUrl
-from starlite import Request, HTTPException
+from starlite import Request
 
 import shortuuid
 from schemas import urls, errors
@@ -20,6 +20,4 @@ async def create_short_url(
 
 async def get_short_url(request: Request, uuid: str):
     match = await request.cache.get(uuid)
-    if match is None:
-        return HTTPException(status_code=404, detail="Url not found")
     return urls.UrlResponse(path=match)
