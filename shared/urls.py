@@ -15,7 +15,11 @@ async def create_short_url(
     match = await request.cache.get(path)
     if match is None:
         await request.cache.set(path, url, 60)
-    return urls.UrlResponse(path=path)
+        return urls.UrlResponse(path=path)
+
+    if match.decode("utf-8") == url:
+        return urls.UrlResponse(path=path)
+    return errors.FormFieldError(field="custom_path", error="Already used")
 
 
 async def get_short_url(request: Request, uuid: str):

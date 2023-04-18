@@ -1,0 +1,10 @@
+<form action="{{action_url}}" method="{{method}}">
+    {% for field in fields %}
+    <label for="{{field.html_name}}">{{field.label}}</label>
+    <input type="{{field.type}}" id="{{field.id}}" name="{{field.html_name}}" placeholder="{{field.placeholder}}" value="{{field.value}}" {% if field.error %}aria-invalid="true" {% endif %} {% if required %}required{% endif %} />
+    {% if field.error %}
+    <small>{{field.error}}</small>
+    {% endif %}
+    {% endfor %}
+    <button type="submit">{{submit_label}}</button>
+</form>

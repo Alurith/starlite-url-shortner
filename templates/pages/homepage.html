@@ -7,23 +7,13 @@
         <h1>Get your short URL</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus vel nibh et vulputate.</p>
     </hgroup>
-    <!-- Preview -->
     <section>
-        <form action="{{url_for('short_url')}}" method="post">
-            <div class="grid">
-                <input type="text" name="url" id="url" placeholder="Enter a URL" aria-label="URL" {% if error %} {% for field in fields %} {% if 'url'==field.name %} aria-invalid="true" {% endif %} {% endfor %} {% endif %} required />
-                <input type="text" name="custom_path" id="custom_path" placeholder="Custom path" aria-label="Custom path" />
-            </div>
-            <button type="submit">Subscribe</button>
-            <fieldset>
-                <label for="terms">
-                    <input type="checkbox" role="switch" id="terms" name="terms" />
-                    I agree to the
-                    <a href="#" onclick="event.preventDefault()">Terms of Service</a> and
-                    <a href="#" onclick="event.preventDefault()">Privacy Policy</a>
-                </label>
-            </fieldset>
-        </form>
+        {{form()|safe}}
+    </section>
+    <section>
+        {% if path %}
+        <p>Your url is: <a href="{{path}}">{{path}}</a></p>
+        {% endif %}
     </section>
 </section>
 {% endblock %}
